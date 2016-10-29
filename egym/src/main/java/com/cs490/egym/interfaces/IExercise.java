@@ -4,8 +4,8 @@ import com.cs490.egym.enums.DifficultyEnum;
 import com.cs490.egym.enums.TypeEnum;
 
 public interface IExercise {
-	public int getId();
-	public void setId(int id);
+	public Integer getId();
+	public void setId(Integer id);
 	public String getName();
 	public void setName(String name);
 	public String getDescription();

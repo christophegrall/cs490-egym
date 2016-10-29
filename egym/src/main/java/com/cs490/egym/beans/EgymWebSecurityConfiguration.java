@@ -45,10 +45,10 @@ public class EgymWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //				.antMatchers("/console/**").permitAll()
 //			.authorizeRequests()
 //				.anyRequest().authenticated()
-//		http
-//			.csrf().disable();
-//		http
-//			.headers().frameOptions().disable();
+		http
+			.csrf().disable();
+		http
+			.headers().frameOptions().disable();
 
 //				.anyRequest().authenticated()
 //				.and()

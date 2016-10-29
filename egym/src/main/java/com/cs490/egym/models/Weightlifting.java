@@ -7,16 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.cs490.egym.enums.WeightTypeEnum;
 import com.cs490.egym.interfaces.IWeightliftingExercise;
 
 @Entity
+@Table(name="WEIGHTLIFTING")
 public class Weightlifting implements IWeightliftingExercise {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ID")
-	private int id;
+	@Column(name="WEIGHTLIFTING_ID")
+	private Integer id;
 	
 	@Column(name="WEIGHT")
 	private double weight;
@@ -25,23 +29,26 @@ public class Weightlifting implements IWeightliftingExercise {
 	private WeightTypeEnum weightType;
 	
 	@Column(name="REPS")
-	private int reps;
+	private Integer reps;
 	
 	@Column(name="SETS")
-	private int sets;
+	private Integer sets;
 	
-	@Column(name="EXERCISE_ID")
-	private int exerciseID;
+	@OneToOne
+	@JoinColumn(name="EXERCISE_ID")
+	private Exercise exerciseID;
 	
+	//TODO:Datatype needs to be User
+	//TODO:Add OneToOne & JoinColumn
 	@Column(name="USER_ID")
-	private int userID;
+	private Integer userID;
 	
 	@Column(name="TIME", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable=false, insertable=false)	
 	private Timestamp date;
 	
 	protected Weightlifting() {}
 
-	public Weightlifting(double weight, WeightTypeEnum weightType, int reps, int sets, int exerciseID, int userID,
+	public Weightlifting(double weight, WeightTypeEnum weightType, Integer reps, Integer sets, Exercise exerciseID, Integer userID,
 			Timestamp date) {
 		this.weight = weight;
 		this.weightType = weightType;
@@ -53,32 +60,32 @@ public class Weightlifting implements IWeightliftingExercise {
 	}
 
 	@Override
-	public int getID() {
+	public Integer getID() {
 		return id;
 	}
 
 	@Override
-	public void setID(int id) {
+	public void setID(Integer id) {
 		this.id = id;
 	}
 
 	@Override
-	public int getExerciseID() {
+	public Exercise getExerciseID() {
 		return exerciseID;
 	}
 
 	@Override
-	public void setExerciseID(int exerciseID) {
+	public void setExerciseID(Exercise exerciseID) {
 		this.exerciseID = exerciseID;
 	}
 
 	@Override
-	public int getUserID() {
+	public Integer getUserID() {
 		return userID;
 	}
 
 	@Override
-	public void setUserID(int userID) {
+	public void setUserID(Integer userID) {
 		this.userID = userID;
 	}
 
@@ -113,22 +120,22 @@ public class Weightlifting implements IWeightliftingExercise {
 	}
 
 	@Override
-	public int getReps() {
+	public Integer getReps() {
 		return reps;
 	}
 
 	@Override
-	public void setReps(int reps) {
+	public void setReps(Integer reps) {
 		this.reps = reps;
 	}
 
 	@Override
-	public int getSets() {
+	public Integer getSets() {
 		return sets;
 	}
 
 	@Override
-	public void setSets(int sets) {
+	public void setSets(Integer sets) {
 		this.sets = sets;
 	}
 

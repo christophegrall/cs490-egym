@@ -7,37 +7,42 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.cs490.egym.interfaces.ICoreExercise;
 
 @Entity
+@Table(name="CORE")
 public class Core implements ICoreExercise {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ID")
-	private int id;
+	@Column(name="CORE_ID")
+	private Integer id;
 	
-	@Column(name="EXERCISE_ID")
-	private int exerciseID;
+	@OneToOne
+	@JoinColumn(name="EXERCISE_ID")
+	private Exercise exerciseID;
 	
 	@Column(name="USER_ID")
-	private int userID;
+	private Integer userID;
 	
 	@Column(name="TIME", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable=false, insertable=false)	
 	private Timestamp date;
 	
 	@Column(name="MINUTES")
-	private int minutes;
+	private Integer minutes;
 	
 	@Column(name="REPS")
-	private int reps;
+	private Integer reps;
 	
 	@Column(name="SETS")
-	private int sets;
+	private Integer sets;
 	
 	protected Core() {}
 
-	public Core(int exerciseID, int userID, Timestamp date, int minutes, int reps, int sets) {
+	public Core(Exercise exerciseID, Integer userID, Timestamp date, Integer minutes, Integer reps, Integer sets) {
 		this.exerciseID = exerciseID;
 		this.userID = userID;
 		this.date = date;
@@ -47,32 +52,32 @@ public class Core implements ICoreExercise {
 	}
 
 	@Override
-	public int getID() {
+	public Integer getID() {
 		return id;
 	}
 
 	@Override
-	public void setID(int id) {
+	public void setID(Integer id) {
 		this.id = id;
 	}
 
 	@Override
-	public int getExerciseID() {
+	public Exercise getExerciseID() {
 		return exerciseID;
 	}
 
 	@Override
-	public void setExerciseID(int exerciseID) {
+	public void setExerciseID(Exercise exerciseID) {
 		this.exerciseID = exerciseID;
 	}
 
 	@Override
-	public int getUserID() {
+	public Integer getUserID() {
 		return userID;
 	}
 
 	@Override
-	public void setUserID(int userID) {
+	public void setUserID(Integer userID) {
 		this.userID = userID;
 	}
 
@@ -87,32 +92,32 @@ public class Core implements ICoreExercise {
 	}
 
 	@Override
-	public int getReps() {
+	public Integer getReps() {
 		return reps;
 	}
 
 	@Override
-	public void setReps(int reps) {
+	public void setReps(Integer reps) {
 		this.reps = reps;
 	}
 
 	@Override
-	public int getSets() {
+	public Integer getSets() {
 		return sets;
 	}
 
 	@Override
-	public void setSets(int sets) {
+	public void setSets(Integer sets) {
 		this.sets = sets;
 	}
 
 	@Override
-	public int getMinutes() {
+	public Integer getMinutes() {
 		return minutes;
 	}
 
 	@Override
-	public void setMinutes(int minutes) {
+	public void setMinutes(Integer minutes) {
 		this.minutes = minutes;
 	}
 

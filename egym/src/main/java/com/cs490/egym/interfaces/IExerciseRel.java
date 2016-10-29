@@ -2,13 +2,15 @@ package com.cs490.egym.interfaces;
 
 import java.sql.Timestamp;
 
+import com.cs490.egym.models.Exercise;
+
 public interface IExerciseRel {
-	public int getID();
-	public void setID(int id);
-	public int getExerciseID();
-	public void setExerciseID(int exerciseID);
-	public int getUserID();
-	public void setUserID(int userID);
+	public Integer getID();
+	public void setID(Integer id);
+	public Exercise getExerciseID();
+	public void setExerciseID(Exercise exerciseID);
+	public Integer getUserID();
+	public void setUserID(Integer userID);
 	public Timestamp getDate();
 	public void setDate(Timestamp date);
 }

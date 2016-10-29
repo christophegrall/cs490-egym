@@ -7,34 +7,39 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.cs490.egym.interfaces.ICardioExercise;
 
 @Entity
+@Table(name="CARDIO")
 public class Cardio implements ICardioExercise {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ID")
-	private int id;
+	@Column(name="CARDIO_ID")
+	private Integer id;
 	
 	@Column(name="DISTANCE")
 	private double distance;
 	
 	@Column(name="MINUTES")
-	private int minutes;
+	private Integer minutes;
 	
-	@Column(name="EXERCISE_ID")
-	private int exerciseID;
+	@OneToOne
+	@JoinColumn(name="EXERCISE_ID")
+	private Exercise exerciseID;
 	
 	@Column(name="USER_ID")
-	private int userID;
+	private Integer userID;
 	
 	@Column(name="TIME", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable=false, insertable=false)	
 	private Timestamp date;
 	
 	protected Cardio() {}
 	
-	public Cardio(double distance, int minutes, int exerciseID, int userID, Timestamp date) {
+	public Cardio(double distance, Integer minutes, Exercise exerciseID, Integer userID, Timestamp date) {
 		this.distance = distance;
 		this.minutes = minutes;
 		this.exerciseID = exerciseID;
@@ -43,32 +48,32 @@ public class Cardio implements ICardioExercise {
 	}
 
 	@Override
-	public int getID() {
+	public Integer getID() {
 		return id;
 	}
 
 	@Override
-	public void setID(int id) {
+	public void setID(Integer id) {
 		this.id = id;
 	}
 
 	@Override
-	public int getExerciseID() {
+	public Exercise getExerciseID() {
 		return exerciseID;
 	}
 
 	@Override
-	public void setExerciseID(int exerciseID) {
+	public void setExerciseID(Exercise exerciseID) {
 		this.exerciseID = exerciseID;
 	}
 
 	@Override
-	public int getUserID() {
+	public Integer getUserID() {
 		return userID;
 	}
 
 	@Override
-	public void setUserID(int userID) {
+	public void setUserID(Integer userID) {
 		this.userID = userID;
 	}
 
@@ -93,12 +98,12 @@ public class Cardio implements ICardioExercise {
 	}
 
 	@Override
-	public int getMinutes() {
+	public Integer getMinutes() {
 		return minutes;
 	}
 
 	@Override
-	public void setMinutes(int minutes) {
+	public void setMinutes(Integer minutes) {
 		this.minutes = minutes;
 	}
 

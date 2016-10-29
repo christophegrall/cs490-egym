@@ -7,8 +7,8 @@ public interface IWeightliftingExercise extends IExerciseRel {
 	public void setWeight(double weight);
 	public WeightTypeEnum getWeightType();
 	public void setWeightType(WeightTypeEnum weightType);
-	public int getReps();
-	public void setReps(int reps);
-	public int getSets();
-	public void setSets(int sets);
+	public Integer getReps();
+	public void setReps(Integer reps);
+	public Integer getSets();
+	public void setSets(Integer sets);
 }

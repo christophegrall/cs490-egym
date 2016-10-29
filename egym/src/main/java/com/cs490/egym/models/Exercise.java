@@ -5,17 +5,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.cs490.egym.enums.DifficultyEnum;
 import com.cs490.egym.enums.TypeEnum;
 import com.cs490.egym.interfaces.IExercise;
 
 @Entity
+@Table(name="EXERCISE")
 public class Exercise implements IExercise {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ID")
-	private int id;
+	@Column(name="EXERCISE_ID")
+	private Integer id;
 	
 	@Column(name="NAME")
 	private String name;
@@ -44,12 +46,12 @@ public class Exercise implements IExercise {
 	}
 
 	@Override
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	@Override
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
