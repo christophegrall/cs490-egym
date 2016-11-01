@@ -1,6 +1,6 @@
 package com.cs490.egym.models;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,12 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
-import com.cs490.egym.interfaces.ICoreExercise;
+import com.cs490.egym.interfaces.CoreExercise;
 
 @Entity
 @Table(name="CORE")
-public class Core implements ICoreExercise {
+public class CoreImpl implements CoreExercise {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="CORE_ID")
@@ -23,13 +26,15 @@ public class Core implements ICoreExercise {
 	
 	@OneToOne
 	@JoinColumn(name="EXERCISE_ID")
-	private Exercise exerciseID;
+	private ExerciseImpl exerciseID;
 	
 	@Column(name="USER_ID")
 	private Integer userID;
 	
-	@Column(name="TIME", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable=false, insertable=false)	
-	private Timestamp date;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="LAST_UPDATE", insertable=false)
+	@NotNull
+	private Date date;
 	
 	@Column(name="MINUTES")
 	private Integer minutes;
@@ -40,9 +45,19 @@ public class Core implements ICoreExercise {
 	@Column(name="SETS")
 	private Integer sets;
 	
-	protected Core() {}
+	protected CoreImpl() {}
 
-	public Core(Exercise exerciseID, Integer userID, Timestamp date, Integer minutes, Integer reps, Integer sets) {
+	public CoreImpl(Integer id, ExerciseImpl exerciseID, Integer userID, Date date, Integer minutes, Integer reps, Integer sets) {
+		this.id = id;
+		this.exerciseID = exerciseID;
+		this.userID = userID;
+		this.date = date;
+		this.minutes = minutes;
+		this.reps = reps;
+		this.sets = sets;
+	}
+	
+	public CoreImpl(ExerciseImpl exerciseID, Integer userID, Date date, Integer minutes, Integer reps, Integer sets) {
 		this.exerciseID = exerciseID;
 		this.userID = userID;
 		this.date = date;
@@ -62,12 +77,12 @@ public class Core implements ICoreExercise {
 	}
 
 	@Override
-	public Exercise getExerciseID() {
+	public ExerciseImpl getExerciseID() {
 		return exerciseID;
 	}
 
 	@Override
-	public void setExerciseID(Exercise exerciseID) {
+	public void setExerciseID(ExerciseImpl exerciseID) {
 		this.exerciseID = exerciseID;
 	}
 
@@ -82,12 +97,12 @@ public class Core implements ICoreExercise {
 	}
 
 	@Override
-	public Timestamp getDate() {
+	public Date getDate() {
 		return date;
 	}
 	
 	@Override
-	public void setDate(Timestamp date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
