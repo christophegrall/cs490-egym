@@ -2,7 +2,7 @@ package com.cs490.egym.interfaces;
 
 import com.cs490.egym.enums.WeightTypeEnum;
 
-public interface IWeightliftingExercise extends IExerciseRel {
+public interface WeightliftingExercise extends ExerciseRel {
 	public double getWeight();
 	public void setWeight(double weight);
 	public WeightTypeEnum getWeightType();

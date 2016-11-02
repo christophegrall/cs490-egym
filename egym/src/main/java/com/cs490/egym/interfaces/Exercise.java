@@ -3,7 +3,7 @@ package com.cs490.egym.interfaces;
 import com.cs490.egym.enums.DifficultyEnum;
 import com.cs490.egym.enums.TypeEnum;
 
-public interface IExercise {
+public interface Exercise {
 	public Integer getId();
 	public void setId(Integer id);
 	public String getName();

@@ -2,18 +2,21 @@ package com.cs490.egym.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.cs490.egym.enums.DifficultyEnum;
 import com.cs490.egym.enums.TypeEnum;
-import com.cs490.egym.interfaces.IExercise;
+import com.cs490.egym.interfaces.Exercise;
 
 @Entity
 @Table(name="EXERCISE")
-public class Exercise implements IExercise {
+public class ExerciseImpl implements Exercise {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="EXERCISE_ID")
@@ -26,17 +29,30 @@ public class Exercise implements IExercise {
 	private String description;
 	
 	@Column(name="DIFFICULTY")
+	@Enumerated(EnumType.STRING)
 	private DifficultyEnum difficulty;
 	
 	@Column(name="TYPE")
+	@Enumerated(EnumType.STRING)
 	private TypeEnum type;
 	
 	@Column(name="BUILTIN")
+	@NotNull
 	private boolean builtin;
 	
-	protected Exercise() {}
+	protected ExerciseImpl() {}
 
-	public Exercise(String name, String description, DifficultyEnum difficulty, TypeEnum type,
+	public ExerciseImpl(Integer id, String name, String description, DifficultyEnum difficulty, TypeEnum type,
+			boolean builtin) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.difficulty = difficulty;
+		this.type = type;
+		this.builtin = builtin;
+	}
+	
+	public ExerciseImpl(String name, String description, DifficultyEnum difficulty, TypeEnum type,
 			boolean builtin) {
 		this.name = name;
 		this.description = description;

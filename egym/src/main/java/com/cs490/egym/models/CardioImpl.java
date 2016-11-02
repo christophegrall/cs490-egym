@@ -1,6 +1,6 @@
 package com.cs490.egym.models;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,12 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
-import com.cs490.egym.interfaces.ICardioExercise;
+import com.cs490.egym.interfaces.CardioExercise;
 
 @Entity
 @Table(name="CARDIO")
-public class Cardio implements ICardioExercise {
+public class CardioImpl implements CardioExercise {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="CARDIO_ID")
@@ -29,17 +32,28 @@ public class Cardio implements ICardioExercise {
 	
 	@OneToOne
 	@JoinColumn(name="EXERCISE_ID")
-	private Exercise exerciseID;
+	private ExerciseImpl exerciseID;
 	
 	@Column(name="USER_ID")
 	private Integer userID;
 	
-	@Column(name="TIME", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable=false, insertable=false)	
-	private Timestamp date;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="LAST_UPDATE", insertable=false)
+	@NotNull
+	private Date date;
 	
-	protected Cardio() {}
+	protected CardioImpl() {}
 	
-	public Cardio(double distance, Integer minutes, Exercise exerciseID, Integer userID, Timestamp date) {
+	public CardioImpl(Integer id, double distance, Integer minutes, ExerciseImpl exerciseID, Integer userID, Date date) {
+		this.id = id;
+		this.distance = distance;
+		this.minutes = minutes;
+		this.exerciseID = exerciseID;
+		this.userID = userID;
+		this.date = date;
+	}
+	
+	public CardioImpl(double distance, Integer minutes, ExerciseImpl exerciseID, Integer userID, Date date) {
 		this.distance = distance;
 		this.minutes = minutes;
 		this.exerciseID = exerciseID;
@@ -58,12 +72,12 @@ public class Cardio implements ICardioExercise {
 	}
 
 	@Override
-	public Exercise getExerciseID() {
+	public ExerciseImpl getExerciseID() {
 		return exerciseID;
 	}
 
 	@Override
-	public void setExerciseID(Exercise exerciseID) {
+	public void setExerciseID(ExerciseImpl exerciseID) {
 		this.exerciseID = exerciseID;
 	}
 
@@ -78,12 +92,12 @@ public class Cardio implements ICardioExercise {
 	}
 
 	@Override
-	public Timestamp getDate() {
+	public Date getDate() {
 		return date;
 	}
 
 	@Override
-	public void setDate(Timestamp date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

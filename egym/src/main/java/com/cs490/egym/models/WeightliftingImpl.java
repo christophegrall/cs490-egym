@@ -1,22 +1,27 @@
 package com.cs490.egym.models;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.cs490.egym.enums.WeightTypeEnum;
-import com.cs490.egym.interfaces.IWeightliftingExercise;
+import com.cs490.egym.interfaces.WeightliftingExercise;
 
 @Entity
 @Table(name="WEIGHTLIFTING")
-public class Weightlifting implements IWeightliftingExercise {
+public class WeightliftingImpl implements WeightliftingExercise {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="WEIGHTLIFTING_ID")
@@ -26,6 +31,7 @@ public class Weightlifting implements IWeightliftingExercise {
 	private double weight;
 	
 	@Column(name="WEIGHT_TYPE")
+	@Enumerated(EnumType.STRING)
 	private WeightTypeEnum weightType;
 	
 	@Column(name="REPS")
@@ -36,20 +42,34 @@ public class Weightlifting implements IWeightliftingExercise {
 	
 	@OneToOne
 	@JoinColumn(name="EXERCISE_ID")
-	private Exercise exerciseID;
+	private ExerciseImpl exerciseID;
 	
 	//TODO:Datatype needs to be User
 	//TODO:Add OneToOne & JoinColumn
 	@Column(name="USER_ID")
 	private Integer userID;
 	
-	@Column(name="TIME", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable=false, insertable=false)	
-	private Timestamp date;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="LAST_UPDATE", insertable=false)
+	@NotNull
+	private Date date;
 	
-	protected Weightlifting() {}
+	protected WeightliftingImpl() {}
+	
+	public WeightliftingImpl(Integer id, double weight, WeightTypeEnum weightType, Integer reps, Integer sets, ExerciseImpl exerciseID, Integer userID,
+			Date date) {
+		this.id = id;
+		this.weight = weight;
+		this.weightType = weightType;
+		this.reps = reps;
+		this.sets = sets;
+		this.exerciseID = exerciseID;
+		this.userID = userID;
+		this.date = date;
+	}
 
-	public Weightlifting(double weight, WeightTypeEnum weightType, Integer reps, Integer sets, Exercise exerciseID, Integer userID,
-			Timestamp date) {
+	public WeightliftingImpl(double weight, WeightTypeEnum weightType, Integer reps, Integer sets, ExerciseImpl exerciseID, Integer userID,
+			Date date) {
 		this.weight = weight;
 		this.weightType = weightType;
 		this.reps = reps;
@@ -70,12 +90,12 @@ public class Weightlifting implements IWeightliftingExercise {
 	}
 
 	@Override
-	public Exercise getExerciseID() {
+	public ExerciseImpl getExerciseID() {
 		return exerciseID;
 	}
 
 	@Override
-	public void setExerciseID(Exercise exerciseID) {
+	public void setExerciseID(ExerciseImpl exerciseID) {
 		this.exerciseID = exerciseID;
 	}
 
@@ -90,12 +110,12 @@ public class Weightlifting implements IWeightliftingExercise {
 	}
 
 	@Override
-	public Timestamp getDate() {
+	public Date getDate() {
 		return date;
 	}
 
 	@Override
-	public void setDate(Timestamp date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
