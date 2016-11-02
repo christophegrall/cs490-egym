@@ -1,2 +1,2 @@
 # eGym Application
-Group project for CS 490 class. (Work in progress)
+Group project for CS 490 class. (Work in progress) defnintely a work in progress (RS)
