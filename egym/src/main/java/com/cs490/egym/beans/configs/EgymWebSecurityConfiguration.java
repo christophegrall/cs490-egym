@@ -3,9 +3,7 @@ package com.cs490.egym.beans.configs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.cs490.egym.beans.security.JwtAuthenticationEntryPoint;
 import com.cs490.egym.beans.security.JwtAuthenticationTokenFilter;
 
+@Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled=true)
 public class EgymWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -43,31 +42,24 @@ public class EgymWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
-    @Bean
     public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
-        JwtAuthenticationTokenFilter authenticationTokenFilter = new JwtAuthenticationTokenFilter();
-        authenticationTokenFilter.setAuthenticationManager(authenticationManagerBean());
-        return authenticationTokenFilter;
+        return new JwtAuthenticationTokenFilter();
     }
     
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf().disable()
+        	.csrf().disable()    
+            .headers().frameOptions().disable().and()
+            .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-
-                .authorizeRequests()
+        httpSecurity
+        	.authorizeRequests()
                 .antMatchers(
                         HttpMethod.GET,
                         "/",
+                        "/**",
                         "/*.html",
                         "/favicon.ico",
                         "/**/*.html",
@@ -75,27 +67,13 @@ public class EgymWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/**/*.js"
                 ).permitAll()
                 .antMatchers("/auth/**").permitAll()
-                .anyRequest().authenticated();
+                .antMatchers(HttpMethod.GET, "/protected","/user").authenticated();
+//                .anyRequest().authenticated(); <--declares that any other URLs need to be successfully authenticated
 
         // Custom JWT based security filter
         httpSecurity
-                .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
-
-        httpSecurity.headers().cacheControl();
+        	.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+        httpSecurity
+        	.headers().cacheControl();
     }
-    
-    @Configuration
-    @Order(1)
-    public static class ConsoleWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
-    	@Override
-    	protected void configure(HttpSecurity http) throws Exception {
-    		http
-    			.authorizeRequests()
-    				.antMatchers("/console/**").permitAll().and()
-    			.headers().frameOptions().disable().and()
-    			.csrf().disable();
-    	}
-    }
-	
-	
 }

@@ -16,24 +16,24 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JwtTokenUtil implements Serializable {
-	
-	private static final long serialVersionUID = 11991403830767117L;
-	
-	private static final String CLAIM_KEY_USERNAME = "sub";
-    private static final String CLAIM_KEY_AUDIENCE = "audience";
-    private static final String CLAIM_KEY_CREATED = "created";
+
+    private static final long serialVersionUID = -3301605591108950415L;
+
+    static final String CLAIM_KEY_USERNAME = "sub";
+    static final String CLAIM_KEY_AUDIENCE = "audience";
+    static final String CLAIM_KEY_CREATED = "created";
 
     private static final String AUDIENCE_UNKNOWN = "unknown";
     private static final String AUDIENCE_WEB = "web";
     private static final String AUDIENCE_MOBILE = "mobile";
     private static final String AUDIENCE_TABLET = "tablet";
-    
+
     @Value("${jwt.secret}")
     private String secret;
 
     @Value("${jwt.expiration}")
     private Long expiration;
-    
+
     public String getUsernameFromToken(String token) {
         String username;
         try {
@@ -129,7 +129,7 @@ public class JwtTokenUtil implements Serializable {
         return generateToken(claims);
     }
 
-    private String generateToken(Map<String, Object> claims) {
+    String generateToken(Map<String, Object> claims) {
         return Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(generateExpirationDate())
@@ -159,7 +159,10 @@ public class JwtTokenUtil implements Serializable {
         JwtUser user = (JwtUser) userDetails;
         final String username = getUsernameFromToken(token);
         final Date created = getCreatedDateFromToken(token);
-        return (username.equals(user.getUsername()) && !isTokenExpired(token)
-        		&& !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordResetDate()));
+        //final Date expiration = getExpirationDateFromToken(token);
+        return (
+                username.equals(user.getUsername())
+                        && !isTokenExpired(token)
+                        && !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordResetDate()));
     }
 }

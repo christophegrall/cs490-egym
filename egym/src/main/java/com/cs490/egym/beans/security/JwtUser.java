@@ -13,7 +13,7 @@ public class JwtUser implements UserDetails {
 	private static final long serialVersionUID = -6132406402041645271L;
 	
 	private final Integer id;
-    private final String username;
+	private final String username;
     private final String firstname;
     private final String lastname;
     private final String password;
@@ -22,20 +22,28 @@ public class JwtUser implements UserDetails {
     private final boolean enabled;
     private final Date lastPasswordResetDate;
 
-    public JwtUser(Integer id, String username, String firstname, String lastname, String password, String email,
-			boolean enabled, Collection<? extends GrantedAuthority> authorities, Date lastPasswordResetDate) {
-		this.id = id;
-		this.username = username;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.password = password;
-		this.email = email;
-		this.authorities = authorities;
-		this.enabled = enabled;
-		this.lastPasswordResetDate = lastPasswordResetDate;
-	}
+    public JwtUser(
+          Integer id,
+          String username,
+          String firstname,
+          String lastname,
+          String email,
+          String password, Collection<? extends GrantedAuthority> authorities,
+          boolean enabled,
+          Date lastPasswordResetDate
+    ) {
+        this.id = id;
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.authorities = authorities;
+        this.enabled = enabled;
+        this.lastPasswordResetDate = lastPasswordResetDate;
+    }
 
-	@JsonIgnore
+    @JsonIgnore
     public Integer getId() {
         return id;
     }
@@ -43,6 +51,24 @@ public class JwtUser implements UserDetails {
     @Override
     public String getUsername() {
         return username;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
     public String getFirstname() {
@@ -72,27 +98,9 @@ public class JwtUser implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
-    
+
     @JsonIgnore
     public Date getLastPasswordResetDate() {
         return lastPasswordResetDate;
     }
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }

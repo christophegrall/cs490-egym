@@ -3,7 +3,6 @@ package com.cs490.egym.beans.security;
 import java.io.IOException;
 import java.io.Serializable;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,12 +16,12 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Se
 	private static final long serialVersionUID = -8597558753407703419L;
 
 	@Override
-	public void commence(
-			HttpServletRequest httpServletRequest, 
-			HttpServletResponse httpServletResponse, 
-			AuthenticationException authenticationException)
-			throws IOException, ServletException {
-		httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
-	}
+    public void commence(HttpServletRequest request,
+                         HttpServletResponse response,
+                         AuthenticationException authException) throws IOException {
+        // This is invoked when user tries to access a secured REST resource without supplying any credentials
+        // We should just send a 401 Unauthorized response because there is no 'login page' to redirect to
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+    }
 
 }

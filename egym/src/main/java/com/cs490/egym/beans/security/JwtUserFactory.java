@@ -10,18 +10,19 @@ import com.cs490.egym.models.Authority;
 import com.cs490.egym.models.User;
 
 public class JwtUserFactory {
-	private JwtUserFactory() {}
+	private JwtUserFactory() {
+    }
 
     public static JwtUser create(User user) {
         return new JwtUser(
                 user.getId(),
                 user.getUsername(),
-                user.getPassword(),
                 user.getFirstname(),
                 user.getLastname(),
                 user.getEmail(),
-                user.isEnabled(),
+                user.getPassword(),
                 mapToGrantedAuthorities(user.getAuthorities()),
+                user.getEnabled(),
                 user.getLastPasswordResetDate()
         );
     }

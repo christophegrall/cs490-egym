@@ -16,6 +16,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 @Table(name="USER")
@@ -25,12 +28,13 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
-	@Column(name="USERNAME")
+	@Column(name="USERNAME", unique=true)
 	@NotNull
 	private String username;
 	
-	@Column(name="PASSWORD")
+	@Column(name="PASSWORD", length = 100)
 	@NotNull
+	@Size(min = 4, max = 100)
 	private String password;
 	
 	@Column(name="FIRSTNAME")
@@ -109,7 +113,7 @@ public class User {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = new BCryptPasswordEncoder().encode(password);
 	}
 
 	public String getFirstname() {
@@ -136,7 +140,7 @@ public class User {
 		this.email = email;
 	}
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 
