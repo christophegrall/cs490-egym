@@ -38431,7 +38431,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var AppComponent = (function () {
     function AppComponent() {
-        this.title = 'app works!';
+        this.title = 'Welcome to eGym!';
+        this.subtitle = 'A Fitness Tracking App';
     }
     AppComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Component */])({
@@ -54144,7 +54145,7 @@ module.exports = ""
 /* 589 */
 /***/ function(module, exports) {
 
-module.exports = "<h1>\n  {{title}}\n</h1>\n"
+module.exports = "<h1>{{title}}</h1>\n<h2>{{subtitle}}</h2>\n"
 
 /***/ },
 /* 590 */
