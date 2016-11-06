@@ -41,7 +41,7 @@ public class AppController{
 	}
 	
 	//TODO: change to POST if user submits to form; otherwise keep to GET
-	@RequestMapping(value="/deleteExerciseID/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/deletebyid/{id}", method = RequestMethod.GET)
 	public void deleteExercise(@PathVariable("id") int id)
 	{
 			repository.delete(id);
