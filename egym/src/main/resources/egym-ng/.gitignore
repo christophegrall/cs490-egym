@@ -13,6 +13,7 @@
 npm-debug.log
 testem.log
 /typings
+/.vscode
 
 # e2e
 /e2e/*.js
