@@ -15,25 +15,26 @@ import com.cs490.egym.models.ExerciseImpl;
 import com.cs490.egym.repositories.ExerciseRepository;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/exercise")
 public class AppController{
 	
 	@Autowired
 	private ExerciseRepository repository;
 	
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="/getall", method=RequestMethod.GET)
 	public ResponseEntity<Collection<ExerciseImpl>> listAllExercises() throws IOException
 	{
 		return new ResponseEntity<>((Collection<ExerciseImpl>) repository.findAll(), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/getByExerciseID/{id}", method = RequestMethod.GET) 
-	public ResponseEntity<Collection<ExerciseImpl>> getById(@PathVariable("id") int id) throws IOException
+	@RequestMapping(value="/getbyid/{id}", method = RequestMethod.GET) 
+	public ResponseEntity<ExerciseImpl> getById(@PathVariable("id") int id) throws IOException
 	{
-		return new ResponseEntity<>(repository.findById(id), HttpStatus.OK);
+		/*return new ResponseEntity<>(repository.findById(id), HttpStatus.OK);*/
+		return new ResponseEntity<>(repository.findOne(id), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/addExercise", method = RequestMethod.POST, headers = "Accept=application/json")
+	@RequestMapping(value="/addexercise", method = RequestMethod.POST, headers = "Accept=application/json")
 	public ExerciseImpl addExercise(@RequestBody ExerciseImpl e)
 	{
 		return repository.save(e);
