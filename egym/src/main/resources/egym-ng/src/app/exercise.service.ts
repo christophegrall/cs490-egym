@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptionsArgs, Headers, RequestOptions } from '@angular/http';
 
 import { Exercise } from './exercise';
 import { Observable } from 'rxjs/Rx';
@@ -9,18 +9,56 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ExerciseService {
+  private exerciseUrl: string = "api/exercise";
 
   constructor(private http: Http) { }
 
-  getExercises(): Observable<Exercise[]> {
-    return this.http.get("api/exercise")
-                .map(this.extractedData)
+  getAll(): Observable<Exercise[]> {
+    return this.http.get(this.exerciseUrl)
+                .map((res: Response) => res.json() || {})
                 .catch(this.handleError);
   }
 
-  private extractedData(res: Response) {
-    let body = res.json();
-    return body || { };
+  get(id: number): Observable<Exercise[]> {
+    return this.http.get(`${this.exerciseUrl}/${id}`)
+                .map((res: Response) => res.json()[0] || {})
+                .catch(this.handleError);
+  }
+
+  add(body: Object, customHeaders?: Object): Observable<Exercise[]> {
+    let bodyString = JSON.stringify(body);
+    let defaultHeaders = new Headers({"Content-Type":"application/json"});
+    let headers: Headers = customHeaders ? new Headers(customHeaders) : defaultHeaders;
+    let options: RequestOptions = new RequestOptions({headers: headers});
+    return this.http.post(`${this.exerciseUrl}`, bodyString, options)
+                .map((res: Response) => res.json() || {})
+                .catch(this.handleError);
+  }
+
+  update(body: Object, customHeaders?: Object): Observable<Exercise[]> {
+    let bodyString = JSON.stringify(body);
+    let defaultHeaders = new Headers({"Content-Type":"application/json"});
+    let headers: Headers = customHeaders ? new Headers(customHeaders) : defaultHeaders;
+    let options: RequestOptions = new RequestOptions({headers: headers});
+    return this.http.put(`${this.exerciseUrl}`, bodyString, options)
+                .map((res: Response) => res.json() || {})
+                .catch(this.handleError);
+  }
+
+  patchUpdate(body: Object, customHeaders?: Object): Observable<Exercise[]> {
+    let bodyString = JSON.stringify(body);
+    let defaultHeaders = new Headers({"Content-Type":"application/json"});
+    let headers: Headers = customHeaders ? new Headers(customHeaders) : defaultHeaders;
+    let options: RequestOptions = new RequestOptions({headers: headers});
+    return this.http.patch(`${this.exerciseUrl}`, bodyString, options)
+                .map((res: Response) => res.json() || {})
+                .catch(this.handleError);
+  }
+
+  remove(id: number): Observable<Exercise[]> {
+    return this.http.delete(`${this.exerciseUrl}/${id}`)
+                .map((res: Response) => res.json() || {})
+                .catch(this.handleError);
   }
 
   private handleError(error: Response | any) {
@@ -35,5 +73,4 @@ export class ExerciseService {
     console.error(errMsg);
     return Observable.throw(errMsg);
   }
-
 }
