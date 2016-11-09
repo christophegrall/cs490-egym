@@ -21,27 +21,27 @@ public class AppController{
 	@Autowired
 	private ExerciseRepository repository;
 	
-	@RequestMapping(value="/getall", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Collection<ExerciseImpl>> listAllExercises() throws IOException
 	{
 		return new ResponseEntity<>((Collection<ExerciseImpl>) repository.findAll(), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/getbyid/{id}", method = RequestMethod.GET) 
+	@RequestMapping(value="/{id}", method = RequestMethod.GET) 
 	public ResponseEntity<ExerciseImpl> getById(@PathVariable("id") int id) throws IOException
 	{
 		/*return new ResponseEntity<>(repository.findById(id), HttpStatus.OK);*/
 		return new ResponseEntity<>(repository.findOne(id), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/addexercise", method = RequestMethod.POST, headers = "Accept=application/json")
+	@RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
 	public ExerciseImpl addExercise(@RequestBody ExerciseImpl e)
 	{
 		return repository.save(e);
 	}
 	
 	//TODO: change to POST if user submits to form; otherwise keep to GET
-	@RequestMapping(value="/deletebyid/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
 	public void deleteExercise(@PathVariable("id") int id)
 	{
 			repository.delete(id);
