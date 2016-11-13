@@ -44,10 +44,9 @@ public class WeightliftingImpl implements WeightliftingExercise {
 	@JoinColumn(name="EXERCISE_ID")
 	private ExerciseImpl exerciseID;
 	
-	//TODO:Datatype needs to be User
-	//TODO:Add OneToOne & JoinColumn
-	@Column(name="USER_ID")
-	private Integer userID;
+	@OneToOne
+	@JoinColumn(name="USER_ID")
+	private User userID;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="LAST_UPDATE", insertable=false)
@@ -56,7 +55,7 @@ public class WeightliftingImpl implements WeightliftingExercise {
 	
 	protected WeightliftingImpl() {}
 	
-	public WeightliftingImpl(Integer id, double weight, WeightTypeEnum weightType, Integer reps, Integer sets, ExerciseImpl exerciseID, Integer userID,
+	public WeightliftingImpl(Integer id, double weight, WeightTypeEnum weightType, Integer reps, Integer sets, ExerciseImpl exerciseID, User userID,
 			Date date) {
 		this.id = id;
 		this.weight = weight;
@@ -68,7 +67,7 @@ public class WeightliftingImpl implements WeightliftingExercise {
 		this.date = date;
 	}
 
-	public WeightliftingImpl(double weight, WeightTypeEnum weightType, Integer reps, Integer sets, ExerciseImpl exerciseID, Integer userID,
+	public WeightliftingImpl(double weight, WeightTypeEnum weightType, Integer reps, Integer sets, ExerciseImpl exerciseID, User userID,
 			Date date) {
 		this.weight = weight;
 		this.weightType = weightType;
@@ -100,12 +99,12 @@ public class WeightliftingImpl implements WeightliftingExercise {
 	}
 
 	@Override
-	public Integer getUserID() {
+	public User getUserID() {
 		return userID;
 	}
 
 	@Override
-	public void setUserID(Integer userID) {
+	public void setUserID(User userID) {
 		this.userID = userID;
 	}
 
