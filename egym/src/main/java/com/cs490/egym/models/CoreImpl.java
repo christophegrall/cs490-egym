@@ -28,11 +28,12 @@ public class CoreImpl implements CoreExercise {
 	@JoinColumn(name="EXERCISE_ID")
 	private ExerciseImpl exerciseID;
 	
-	@Column(name="USER_ID")
-	private Integer userID;
+	@OneToOne
+	@JoinColumn(name="USER_ID")
+	private User userID;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="LAST_UPDATE", insertable=false)
+	@Column(name="LAST_UPDATE")
 	@NotNull
 	private Date date;
 	
@@ -47,7 +48,7 @@ public class CoreImpl implements CoreExercise {
 	
 	protected CoreImpl() {}
 
-	public CoreImpl(Integer id, ExerciseImpl exerciseID, Integer userID, Date date, Integer minutes, Integer reps, Integer sets) {
+	public CoreImpl(Integer id, ExerciseImpl exerciseID, User userID, Date date, Integer minutes, Integer reps, Integer sets) {
 		this.id = id;
 		this.exerciseID = exerciseID;
 		this.userID = userID;
@@ -57,7 +58,7 @@ public class CoreImpl implements CoreExercise {
 		this.sets = sets;
 	}
 	
-	public CoreImpl(ExerciseImpl exerciseID, Integer userID, Date date, Integer minutes, Integer reps, Integer sets) {
+	public CoreImpl(ExerciseImpl exerciseID, User userID, Date date, Integer minutes, Integer reps, Integer sets) {
 		this.exerciseID = exerciseID;
 		this.userID = userID;
 		this.date = date;
@@ -87,12 +88,12 @@ public class CoreImpl implements CoreExercise {
 	}
 
 	@Override
-	public Integer getUserID() {
+	public User getUserID() {
 		return userID;
 	}
 
 	@Override
-	public void setUserID(Integer userID) {
+	public void setUserID(User userID) {
 		this.userID = userID;
 	}
 

@@ -34,17 +34,18 @@ public class CardioImpl implements CardioExercise {
 	@JoinColumn(name="EXERCISE_ID")
 	private ExerciseImpl exerciseID;
 	
-	@Column(name="USER_ID")
-	private Integer userID;
+	@OneToOne
+	@JoinColumn(name="USER_ID")
+	private User userID;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="LAST_UPDATE", insertable=false)
+	@Column(name="LAST_UPDATE")
 	@NotNull
 	private Date date;
 	
 	protected CardioImpl() {}
 	
-	public CardioImpl(Integer id, double distance, Integer minutes, ExerciseImpl exerciseID, Integer userID, Date date) {
+	public CardioImpl(Integer id, double distance, Integer minutes, ExerciseImpl exerciseID, User userID, Date date) {
 		this.id = id;
 		this.distance = distance;
 		this.minutes = minutes;
@@ -53,7 +54,7 @@ public class CardioImpl implements CardioExercise {
 		this.date = date;
 	}
 	
-	public CardioImpl(double distance, Integer minutes, ExerciseImpl exerciseID, Integer userID, Date date) {
+	public CardioImpl(double distance, Integer minutes, ExerciseImpl exerciseID, User userID, Date date) {
 		this.distance = distance;
 		this.minutes = minutes;
 		this.exerciseID = exerciseID;
@@ -82,12 +83,12 @@ public class CardioImpl implements CardioExercise {
 	}
 
 	@Override
-	public Integer getUserID() {
+	public User getUserID() {
 		return userID;
 	}
 
 	@Override
-	public void setUserID(Integer userID) {
+	public void setUserID(User userID) {
 		this.userID = userID;
 	}
 
