@@ -31,7 +31,7 @@ public class FilterController {
 	//@PreAuthorize("hasRole('USER')")
 	@RequestMapping("/filterType")
 	public void filterType() {
-		Repository.getDifficulty(diff);
+//		Repository.getDifficulty(diff);
 		
 		
 //		String x = "blah";
@@ -53,7 +53,7 @@ public class FilterController {
 //	@PreAuthorize("hasRole('USER')")
 	@RequestMapping("/filterDifficulty")
 	public void filterDifficulty(){
-		Repository.getType(type);
+//		Repository.getType(type);
 	}
 	
 }
