@@ -1,5 +1,7 @@
 package com.cs490.egym.controllers;
 
+import java.util.List;
+
 import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cs490.egym.enums.DifficultyEnum;
+import com.cs490.egym.models.ExerciseImpl;
 import com.cs490.egym.repositories.ExerciseRepository;
 
 @RestController
@@ -19,41 +22,29 @@ public class FilterController {
 	
 	String decision = null;
 	
+
 	
-	/**if(decision.equals("type")){
-		filterType();
-	}
-	else if(decision.equals("difficulty")){
-		filterDifficulty();
-	}
-	*/
 
 	//@PreAuthorize("hasRole('USER')")
 	@RequestMapping("/filterType")
 	public void filterType() {
-//		Repository.getDifficulty(diff);
 		
+		String diff = "WEIGHTLIFTING";
 		
-//		String x = "blah";
-//		if(x.equals(DifficultyEnum.ADVANCED)){
-//			int[] s = repo.advanced("advanced");
-//			
-//		}
-//		else if(x.equals(DifficultyEnum.BEGINNER)){
-//			
-//		}
-//		else if(x.equals(DifficultyEnum.EXPERT)){
-//			
-//		}
-//		else if(x.equals(DifficultyEnum.INTERMEDIATE)){
-//			
-//		}
+		List<ExerciseImpl> diffList = repo.getDifficulty(diff);
+		
+		System.out.println(diffList.toArray().toString());
 	}
 	
 //	@PreAuthorize("hasRole('USER')")
 	@RequestMapping("/filterDifficulty")
 	public void filterDifficulty(){
-//		Repository.getType(type);
+		
+		String type = "INTERMEDIATE";
+		
+		List<ExerciseImpl> typeList = repo.getType(type);
+		
+		System.out.println(typeList.toArray().toString());
 	}
 	
 }
