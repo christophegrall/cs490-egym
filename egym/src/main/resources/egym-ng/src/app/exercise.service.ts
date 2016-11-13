@@ -19,7 +19,7 @@ export class ExerciseService {
                 .catch(this.handleError);
   }
 
-  get(id: number): Observable<Exercise[]> {
+  get(id: number): Observable<Exercise> {
     return this.http.get(`${this.exerciseUrl}/${id}`)
                 .map((res: Response) => res.json()[0] || {})
                 .catch(this.handleError);
@@ -70,7 +70,6 @@ export class ExerciseService {
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    console.error(errMsg);
     return Observable.throw(errMsg);
   }
 }
