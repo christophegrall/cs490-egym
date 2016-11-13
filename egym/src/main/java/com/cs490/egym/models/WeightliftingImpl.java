@@ -49,7 +49,7 @@ public class WeightliftingImpl implements WeightliftingExercise {
 	private User userID;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="LAST_UPDATE", insertable=false)
+	@Column(name="LAST_UPDATE")
 	@NotNull
 	private Date date;
 	
