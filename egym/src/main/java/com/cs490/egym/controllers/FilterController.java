@@ -27,13 +27,14 @@ public class FilterController {
 
 	//@PreAuthorize("hasRole('USER')")
 	@RequestMapping("/filterType")
-	public void filterType() {
+	public List<ExerciseImpl> filterType() {
 		
 		String diff = "WEIGHTLIFTING";
 		
 		List<ExerciseImpl> diffList = repo.getDifficulty(diff);
 		
-		System.out.println(diffList.toArray().toString());
+//		System.out.println(diffList.toArray().toString());
+		return diffList;
 	}
 	
 //	@PreAuthorize("hasRole('USER')")
