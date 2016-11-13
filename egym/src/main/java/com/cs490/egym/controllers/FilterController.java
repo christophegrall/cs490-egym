@@ -29,23 +29,23 @@ public class FilterController {
 	@RequestMapping("/filterType")
 	public List<ExerciseImpl> filterType() {
 		
-		String diff = "WEIGHTLIFTING";
+		String type = "WEIGHTLIFTING";
 		
-		List<ExerciseImpl> diffList = repo.getDifficulty(diff);
+		List<ExerciseImpl> typeList = repo.getDifficulty(type);
 		
 //		System.out.println(diffList.toArray().toString());
-		return diffList;
+		return typeList;
 	}
 	
 //	@PreAuthorize("hasRole('USER')")
 	@RequestMapping("/filterDifficulty")
 	public void filterDifficulty(){
 		
-		String type = "INTERMEDIATE";
+		String diff = "INTERMEDIATE";
 		
-		List<ExerciseImpl> typeList = repo.getType(type);
+		List<ExerciseImpl> diffList = repo.getDifficulty(diff);
 		
-		System.out.println(typeList.toArray().toString());
+		System.out.println(diffList.toArray().toString());
 	}
 	
 }

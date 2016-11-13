@@ -23,7 +23,7 @@ public interface ExerciseRepository extends JpaRepository<ExerciseImpl, Integer>
 	List<ExerciseImpl> getDifficulty(String diff);
 	
 	
-	@Query(value = "select* from exercise where type = ?1", nativeQuery=true)
-	List<ExerciseImpl> getType(String type);
+//	@Query(value = "select * from exercise where type = ?1", nativeQuery=true)
+	List<ExerciseImpl> findbyTYPE(String type);
 }
 
