@@ -1,0 +1,6 @@
+{
+  "name": "eGym Fitness Application",
+  "tagline": "Group project for Software Engineering II (CS 490).",
+  "body": "## Synopsis\r\n\r\nThis project is for CSCI 490 - Software Engineering II at Coastal Carolina University. The intent of this project is to be a health tracking app for individuals, trainers, and other health improvers.\r\nThe core technology used in this project is the Java Spring framework, AngularJS 2, Bootstrap 3 for design, and more.  \r\n\r\n## Code Example\r\n\r\n-----fill in-----  \r\n\r\n## Motivation\r\n\r\nThe motivation for this project is to provide an avenue for people to easily maintain a healthy lifestyle.  \r\n\r\n## Installation\r\n\r\nProvide code examples and explanations of how to get the project.  \r\n\r\n## API Reference\r\n\r\n-----fill in-----  \r\n\r\n## Tests\r\n\r\nTests will be done using jUnit and other testing frameworks integrated with Spring and AngularJS 2.  \r\n\r\n## Contributors\r\n\r\nBrandon Jones: https://github.com/bsjones3  \r\nMichael Wagner: https://github.com/mdwagner  \r\nAlex Stultz: https://github.com/abstultz  \r\nBobby Strickland: https://github.com/rlstric1  \r\n\r\n## License\r\n\r\nThis project is licensed under the terms of the MIT license.  \r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
