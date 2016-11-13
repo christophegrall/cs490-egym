@@ -5,11 +5,14 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { ExerciseService } from './exercise.service';
+import { LoginService } from './login.service';
 import { AlertModule, ButtonsModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     AlertModule,
@@ -18,7 +21,10 @@ import { AlertModule, ButtonsModule } from 'ng2-bootstrap/ng2-bootstrap';
     FormsModule,
     HttpModule
   ],
-  providers: [ExerciseService],
+  providers: [
+    ExerciseService,
+    LoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

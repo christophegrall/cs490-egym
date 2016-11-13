@@ -1,0 +1,12 @@
+<form (ngSubmit)="onSubmit(usernameInput.value,passwordInput.value)">
+  <div class="form-group">
+    <label for="username">Username: </label>
+    <input ref-usernameInput type="text" class="form-control" id="usernameId" placeholder="Enter a username" required>
+  </div>
+  <div class="form-group">
+    <label for="password">Password: </label>
+    <input ref-passwordInput type="text" class="form-control" id="passwordId" placeholder="Enter a password" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>
+<p>Token: {{response?.token}}</p>
