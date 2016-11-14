@@ -29,9 +29,6 @@ export class LoginService {
   private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
-      let responseStatus = error.status;
-      if(responseStatus >= 400 && responseStatus <= 499)
-        console.error(`Status code: ${responseStatus}`);
       const body = error.json() || '';
       const err = body.error || JSON.stringify(body);
       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;

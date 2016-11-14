@@ -1,3 +1,2 @@
-<h1>{{title}}</h1>
-<h2>{{subtitle}}</h2>
-<app-login></app-login>
+<app-login *ngIf="active" (onActive)="onActive($event)"></app-login>
+<p *ngIf="!active">Success!</p>

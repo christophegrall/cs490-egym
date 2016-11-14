@@ -9,11 +9,16 @@ import { ExerciseService } from './exercise.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title: string = 'Welcome to eGym!';
-  subtitle: string = 'A Fitness Tracking App';
+  public active: boolean = true;
+  // title: string = 'Welcome to eGym!';
+  // subtitle: string = 'A Fitness Tracking App';
   // exercises: Exercise[];
 
   constructor(private exerciseService: ExerciseService) {}
+
+  onActive(status: boolean) {
+    this.active = status;
+  }
 
   ngOnInit() {
     // this.exerciseService.getAll().subscribe(

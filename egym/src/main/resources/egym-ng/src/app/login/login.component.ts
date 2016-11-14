@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { LoginService } from '../login.service';
 import { AuthResponse } from '../auth-response';
@@ -10,6 +10,7 @@ import { AuthResponse } from '../auth-response';
 })
 export class LoginComponent implements OnInit {
   public response: AuthResponse;
+  @Output() onActive = new EventEmitter<boolean>();
 
   constructor(private login: LoginService) { }
 
@@ -17,9 +18,11 @@ export class LoginComponent implements OnInit {
     this.login.requestAuth(username, password).subscribe(
       data => {
         this.response = data;
+        this.onActive.emit(false);
       },
       err => {
         console.error(err);
+        this.response = new AuthResponse("Failed!");
       }
     );
   }
