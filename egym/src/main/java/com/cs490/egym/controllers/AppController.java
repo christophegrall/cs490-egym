@@ -40,11 +40,9 @@ public class AppController{
 		return repository.save(e);
 	}
 	
-	//TODO: change to POST if user submits to form; otherwise keep to GET
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
 	public void deleteExercise(@PathVariable("id") int id)
 	{
 			repository.delete(id);
 	}
-
 }

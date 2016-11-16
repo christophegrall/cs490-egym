@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { LoginService } from '../login.service';
-import { AuthResponse } from '../auth-response';
+import { LocalStorageService } from 'angular-2-local-storage';
+import { LoginService } from './login.service';
+import { AuthResponse } from './auth-response';
 
 @Component({
   selector: 'app-login',
@@ -10,19 +12,22 @@ import { AuthResponse } from '../auth-response';
 })
 export class LoginComponent implements OnInit {
   public response: AuthResponse;
-  @Output() onActive = new EventEmitter<boolean>();
 
-  constructor(private login: LoginService) { }
+  constructor(
+    private login: LoginService, 
+    private router: Router,
+    private localStorageService: LocalStorageService
+  ) { }
 
   onSubmit(username: string, password: string): void {
     this.login.requestAuth(username, password).subscribe(
       data => {
         this.response = data;
-        this.onActive.emit(false);
+        this.localStorageService.set('token', this.response.token);
+        this.router.navigate(['home']);
       },
       err => {
         console.error(err);
-        this.response = new AuthResponse("Failed!");
       }
     );
   }

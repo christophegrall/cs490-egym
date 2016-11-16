@@ -1,29 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { ExerciseService } from './exercise.service';
-import { LoginService } from './login.service';
-import { AlertModule, ButtonsModule } from 'ng2-bootstrap/ng2-bootstrap';
-import { LoginComponent } from './login/login.component';
+import { AppRoutingModule } from './app-routing.module';
+import { LoginModule } from './login/login.module';
+import { RegisterModule } from './register/register.module';
+import { HomepageModule } from './homepage/homepage.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    PageNotFoundComponent
   ],
   imports: [
-    AlertModule,
-    ButtonsModule,
     BrowserModule,
-    FormsModule,
-    HttpModule
-  ],
-  providers: [
-    ExerciseService,
-    LoginService
+    LoginModule,
+    RegisterModule,
+    HomepageModule,
+    AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })
