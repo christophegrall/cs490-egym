@@ -1,3 +1,50 @@
-<p>
-  register works!
-</p>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10">
+            <h2 class="well">Register for Account</h2>
+            <form class="form-horizontal" (ngSubmit)="onSubmit(emailInput.value,usernameInput.value,passwordInput.value,passwordInput2.value,firstnameInput.value,lastnameInput.value)">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="emailId">Email: </label>
+                    <div class="col-sm-5">
+                        <input ref-emailInput type="email" class="form-control" id="emailId" placeholder="Enter an email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="usernameId">Username: </label>
+                    <div class="col-sm-5">
+                        <input ref-usernameInput type="text" class="form-control" id="usernameId" placeholder="Enter a username" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="passwordId">Password: </label>
+                    <div class="col-sm-5">
+                        <input ref-passwordInput type="password" class="form-control" id="passwordId" placeholder="Enter a password" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="passwordConfirm">Confirm: </label>
+                    <div class="col-sm-5">
+                        <input ref-passwordInput2 type="password" class="form-control" id="passwordConfirm" placeholder="Re-enter password" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="firstnameId">First Name: </label>
+                    <div class="col-sm-5">
+                        <input ref-firstnameInput type="text" class="form-control" id="firstnameId" placeholder="Enter your firstname" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="lastnameId">Last Name: </label>
+                    <div class="col-sm-5">
+                        <input ref-lastnameInput type="text" class="form-control" id="lastnameId" placeholder="Enter your lastname" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-2">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
