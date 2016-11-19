@@ -15,7 +15,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,34 +27,27 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
-	@Column(name="USERNAME", unique=true)
-	@NotNull
+	@Column(name="USERNAME", unique=true, nullable=false)
 	private String username;
 	
-	@Column(name="PASSWORD", length = 100)
-	@NotNull
+	@Column(name="PASSWORD", length = 100, nullable=false)
 	@Size(min = 4, max = 100)
 	private String password;
 	
-	@Column(name="FIRSTNAME")
-	@NotNull
+	@Column(name="FIRSTNAME", nullable=false)
 	private String firstname;
 	
-	@Column(name="LASTNAME")
-	@NotNull
+	@Column(name="LASTNAME", nullable=false)
 	private String lastname;
 	
-	@Column(name="EMAIL")
-	@NotNull
+	@Column(name="EMAIL", nullable=false)
 	private String email;
 	
-	@Column(name="ENABLED")
-	@NotNull
+	@Column(name="ENABLED", nullable=false)
 	private boolean enabled;
 	
-	@Column(name = "LASTPASSWORDRESETDATE")
+	@Column(name = "LASTPASSWORDRESETDATE", nullable=false)
     @Temporal(TemporalType.TIMESTAMP)
-    @NotNull
     private Date lastPasswordResetDate;
 	
 	@ManyToMany(fetch = FetchType.EAGER)

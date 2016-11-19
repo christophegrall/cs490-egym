@@ -41,6 +41,8 @@ public class StartupDBInserts implements CommandLineRunner {
 
 	@Override
 	public void run(String... arg0) throws Exception {
+		//TODO: Add default users
+		
 		User user = userRepo.findByUsername("user");
 		List<ExerciseImpl> exList = new ArrayList<ExerciseImpl>();
 		

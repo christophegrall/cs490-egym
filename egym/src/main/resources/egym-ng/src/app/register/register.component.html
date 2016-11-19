@@ -47,4 +47,20 @@
             </form>
         </div>
     </div>
+    <div bsModal ref-regStatModal="bs-modal" [config]="{backdrop: 'static'}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="successfulRegisterModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="hideStatModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Register Status</h4>
+                </div>
+                <div class="modal-body">{{status}}</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" aria-label="Close" (click)="hideStatModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

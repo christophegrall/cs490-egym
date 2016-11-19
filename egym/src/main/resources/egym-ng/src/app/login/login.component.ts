@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Response } from '@angular/http';
 
 import { LocalStorageService } from 'angular-2-local-storage';
 import { LoginService } from './login.service';
-import { AuthResponse } from './auth-response';
+import { AuthResponse, Auth } from './auth';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { AuthResponse } from './auth-response';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  public response: AuthResponse;
+  public auth: Auth;
 
   constructor(
     private login: LoginService, 
@@ -20,14 +21,27 @@ export class LoginComponent implements OnInit {
   ) { }
 
   onSubmit(username: string, password: string): void {
-    this.login.requestAuth(username, password).subscribe(
+    //TODO: Check username & password for invalid characters, length, etc.
+    this.auth = new Auth(username, password);
+    this.login.requestAuth(this.auth).subscribe(
       data => {
-        this.response = data;
-        this.localStorageService.set('token', this.response.token);
-        this.router.navigate(['home']);
+        switch (data.statusCode) {
+          case 200:
+            this.localStorageService.set('token', data.token);
+            this.router.navigate(['home']);
+            break;
+          default:
+            console.warn(`Status: ${data}`);
+        }
       },
-      err => {
-        console.error(err);
+      error => {
+        //Possible error codes:
+        //422 (incorrect username/password)
+        //423 (account is disabled/locked)
+        if (error instanceof AuthResponse) {
+          //TODO: Show user the problem
+        }
+        console.error(error);
       }
     );
   }
