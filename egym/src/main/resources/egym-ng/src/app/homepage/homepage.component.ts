@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { tokenNotExpired } from 'angular2-jwt';
 import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
@@ -16,7 +17,7 @@ export class HomepageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(!this.localStorageService.get('token')) {
+    if(!tokenNotExpired('egym.token')) {
       this.router.navigate(['login']);
     } else {
       console.log(this.localStorageService.get('token'));

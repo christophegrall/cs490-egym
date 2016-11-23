@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { ModalDirective } from 'ng2-bootstrap/ng2-bootstrap';
 import { RegisterService } from './register.service';
-import { User, UserResponse } from './user';
+import { User, UserModel, UserResponse } from './user';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
   @ViewChild('regStatModal') public regStatModal: ModalDirective;
 
   public user: User;
+  public userModel: UserModel;
   public status: string = "";
   public success: boolean = false;
 
@@ -22,26 +23,19 @@ export class RegisterComponent implements OnInit {
     private registerService: RegisterService
   ) { }
 
-  onSubmit(
-    email: string,
-    username: string,
-    password: string,
-    password2: string,
-    firstname: string,
-    lastname: string
-  ): void {
-    if (password !== password2) {
-      this.status = "Passwords don't match!";
+  onSubmit(model: UserModel, isValid: boolean): void {
+    if(!isValid) {
+      this.status = "Form invalid. Please correct to continue.";
       this.regStatModal.show();
       return;
     }
-    this.user = new User(
-      username,
-      password,
-      firstname,
-      lastname,
-      email
-    );
+    this.user = {
+      username: model.username,
+      password: model.password,
+      firstname: model.firstname,
+      lastname: model.lastname,
+      email: model.email
+    }
     this.registerService.createUser(this.user).subscribe(
       data => {
         switch (data.statusCode) {
@@ -50,14 +44,18 @@ export class RegisterComponent implements OnInit {
             this.success = true;
             break;
           default:
-            this.status = data.body;
+            this.status = `${data.body}!`;
             console.warn(`Status: ${data}`);
         }
         this.regStatModal.show();
       },
       error => {
         if (error instanceof UserResponse) {
-          this.status = error.body;
+          if(error.statusCode === 409) {
+            this.status = "Username already exists!";
+          } else {
+            this.status = `${error.body}!`;
+          }
         } else {
           this.status = "Unknown error";
         }
@@ -77,6 +75,14 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userModel = {
+      username: '',
+      password: '',
+      password2: '',
+      firstname: '',
+      lastname: '',
+      email: ''
+    }
   }
 
 }

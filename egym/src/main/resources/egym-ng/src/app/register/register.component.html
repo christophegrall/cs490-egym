@@ -2,41 +2,62 @@
     <div class="row">
         <div class="col-lg-10">
             <h2 class="well">Register for Account</h2>
-            <form class="form-horizontal" (ngSubmit)="onSubmit(emailInput.value,usernameInput.value,passwordInput.value,passwordInput2.value,firstnameInput.value,lastnameInput.value)">
+            <form class="form-horizontal" ref-registerForm="ngForm" novalidate (ngSubmit)="onSubmit(registerForm.value, registerForm.valid)">
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="emailId">Email: </label>
                     <div class="col-sm-5">
-                        <input ref-emailInput type="email" class="form-control" id="emailId" placeholder="Enter an email" required>
+                        <input ref-email="ngModel" type="email" class="form-control" name="email" 
+                            id="emailId" [ngModel]="userModel.email" placeholder="Enter an email" 
+                            pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$" required>
+                        <small [hidden]="email.valid || (email.pristine && !registerForm.submitted)" class="text-danger">
+                            Email is required and format should be <i>john@doe.com</i>.
+                        </small>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="usernameId">Username: </label>
                     <div class="col-sm-5">
-                        <input ref-usernameInput type="text" class="form-control" id="usernameId" placeholder="Enter a username" required>
+                        <input ref-username="ngModel" type="text" class="form-control" name="username" 
+                            [ngModel]="userModel.username" id="usernameId" placeholder="Enter a username" 
+                            required minlength="4" maxlength="12">
+                        <small [hidden]="username.valid || (username.pristine && !registerForm.submitted)" class="text-danger">
+                            Username is required (minimum 4 characters).
+                        </small>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="passwordId">Password: </label>
                     <div class="col-sm-5">
-                        <input ref-passwordInput type="password" class="form-control" id="passwordId" placeholder="Enter a password" required>
+                        <input ref-password="ngModel" [ngModel]="userModel.password" type="password" class="form-control"
+                            id="passwordId" validateEqual="password2" reverse="true" placeholder="Enter a password" name="password" required>
+                        <small [hidden]="password.valid || (password.pristine && !registerForm.submitted)" class="text-danger">
+                            Password is required.
+                        </small>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="passwordConfirm">Confirm: </label>
                     <div class="col-sm-5">
-                        <input ref-passwordInput2 type="password" class="form-control" id="passwordConfirm" placeholder="Re-enter password" required>
+                        <input ref-password2="ngModel" type="password" class="form-control" name="password2" 
+                            id="passwordConfirm" placeholder="Re-enter password" validateEqual="password" reverse="false" 
+                            [ngModel]="userModel.password2" required>
+                        <small [hidden]="password2.valid || (password2.pristine && !registerForm.submitted)" class="text-danger">
+                            Password mismatch.
+                        </small>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="firstnameId">First Name: </label>
                     <div class="col-sm-5">
-                        <input ref-firstnameInput type="text" class="form-control" id="firstnameId" placeholder="Enter your firstname" required>
+                        <input ref-firstname="ngModel" type="text" class="form-control" id="firstnameId" 
+                            [ngModel]="userModel.firstname" name="firstname" placeholder="Enter your firstname" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="lastnameId">Last Name: </label>
                     <div class="col-sm-5">
-                        <input ref-lastnameInput type="text" class="form-control" id="lastnameId" placeholder="Enter your lastname" required>
+                        <input ref-lastname="ngModel" type="text" class="form-control" id="lastnameId" 
+                            [ngModel]="userModel.lastname" name="lastname" placeholder="Enter your lastname" required>
                     </div>
                 </div>
                 <div class="form-group">

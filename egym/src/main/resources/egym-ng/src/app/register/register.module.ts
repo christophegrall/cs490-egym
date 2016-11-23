@@ -6,10 +6,12 @@ import { AlertModule, ButtonsModule, ModalModule } from 'ng2-bootstrap/ng2-boots
 import { RegisterService } from './register.service';
 import { RegisterComponent } from './register.component';
 import { RegisterRoutingModule } from './register-routing.module';
+import { EqualValidator } from './equal-validator.directive';
 
 @NgModule({
   declarations: [
-    RegisterComponent
+    RegisterComponent,
+    EqualValidator
   ],
   imports: [
     AlertModule,
