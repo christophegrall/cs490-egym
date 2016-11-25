@@ -13,8 +13,13 @@ export class ExerciseService {
 
   constructor(private http: Http) { }
 
-  getAll(): Observable<Exercise[]> {
-    return this.http.get(this.exerciseUrl)
+  getAll(token: string): Observable<Exercise[]> {
+    let headers: Headers = new Headers({
+      "Content-Type":"application/json",
+      "Authorization":token
+    });
+    let options: RequestOptions = new RequestOptions({headers: headers});
+    return this.http.get(this.exerciseUrl, options)
                 .map((res: Response) => res.json() || {})
                 .catch(this.handleError);
   }

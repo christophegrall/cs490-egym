@@ -12,7 +12,6 @@ import { User, UserModel, UserResponse } from './user';
 })
 export class RegisterComponent implements OnInit {
   @ViewChild('regStatModal') public regStatModal: ModalDirective;
-
   public user: User;
   public userModel: UserModel;
   public status: string = "";
@@ -45,19 +44,15 @@ export class RegisterComponent implements OnInit {
             break;
           default:
             this.status = `${data.body}!`;
-            console.warn(`Status: ${data}`);
+            console.warn(data);
         }
         this.regStatModal.show();
       },
       error => {
         if (error instanceof UserResponse) {
-          if(error.statusCode === 409) {
-            this.status = "Username already exists!";
-          } else {
-            this.status = `${error.body}!`;
-          }
+          this.status = `${error.body}!`;
         } else {
-          this.status = "Unknown error";
+          this.status = 'Unknown error';
         }
         this.regStatModal.show();
         console.error(error);

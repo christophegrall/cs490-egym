@@ -7,5 +7,5 @@ export class Exercise {
     public description: string;
     public difficulty: Difficulty;
     public type: Type;
-    public builtin: boolean;
+    public userId: number | any;
 }

@@ -14,6 +14,6 @@ public interface Exercise {
 	public void setDifficulty(DifficultyEnum difficulty);
 	public TypeEnum getType();
 	public void setType(TypeEnum type);
-	public boolean getBuiltin();
-	public void setBuiltin(boolean builtin);
+	public Integer getUserId();
+	public void setUserId(Integer userId);
 }

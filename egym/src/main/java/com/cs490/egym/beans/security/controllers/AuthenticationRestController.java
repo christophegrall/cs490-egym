@@ -28,6 +28,7 @@ import com.cs490.egym.beans.security.JwtUser;
 import com.cs490.egym.beans.security.services.JwtAuthenticationResponse;
 
 @RestController
+@RequestMapping("api")
 public class AuthenticationRestController {
 	@Value("${jwt.header}")
     private String tokenHeader;
@@ -60,9 +61,9 @@ public class AuthenticationRestController {
 			return ResponseEntity.ok(new JwtAuthenticationResponse(token));
 
 		} catch (DisabledException de) {
-			return ResponseEntity.status(HttpStatus.LOCKED).body("Disabled");
+			return ResponseEntity.status(HttpStatus.LOCKED).body("Account Disabled");
 		} catch (LockedException le) {
-			return ResponseEntity.status(HttpStatus.LOCKED).body("Locked");
+			return ResponseEntity.status(HttpStatus.LOCKED).body("Account Locked");
 		} catch (UsernameNotFoundException unf) {
 			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Username not found");
 		} catch (BadCredentialsException bce) {
@@ -80,7 +81,7 @@ public class AuthenticationRestController {
             String refreshedToken = jwtTokenUtil.refreshToken(token);
             return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
         } else {
-            return ResponseEntity.badRequest().body(null);
+            return ResponseEntity.badRequest().body("Authentication Failed");
         }
     }
 }

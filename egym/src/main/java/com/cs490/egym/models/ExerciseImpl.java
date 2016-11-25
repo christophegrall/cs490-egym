@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import com.cs490.egym.enums.DifficultyEnum;
 import com.cs490.egym.enums.TypeEnum;
@@ -36,29 +35,35 @@ public class ExerciseImpl implements Exercise {
 	@Enumerated(EnumType.STRING)
 	private TypeEnum type;
 	
-	@Column(name="BUILTIN")
-	@NotNull
-	private boolean builtin;
+	@Column(name="USER_ID", nullable=true)
+	private Integer userId;
 	
 	protected ExerciseImpl() {}
 
 	public ExerciseImpl(Integer id, String name, String description, DifficultyEnum difficulty, TypeEnum type,
-			boolean builtin) {
+			Integer userId) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.difficulty = difficulty;
 		this.type = type;
-		this.builtin = builtin;
+		this.userId = userId;
 	}
 	
 	public ExerciseImpl(String name, String description, DifficultyEnum difficulty, TypeEnum type,
-			boolean builtin) {
+			Integer userId) {
 		this.name = name;
 		this.description = description;
 		this.difficulty = difficulty;
 		this.type = type;
-		this.builtin = builtin;
+		this.userId = userId;
+	}
+	
+	public ExerciseImpl(String name, String description, DifficultyEnum difficulty, TypeEnum type) {
+		this.name = name;
+		this.description = description;
+		this.difficulty = difficulty;
+		this.type = type;
 	}
 
 	@Override
@@ -111,19 +116,17 @@ public class ExerciseImpl implements Exercise {
 		this.type = type;
 	}
 
-	@Override
-	public boolean getBuiltin() {
-		return builtin;
+	public Integer getUserId() {
+		return userId;
 	}
 
-	@Override
-	public void setBuiltin(boolean builtin) {
-		this.builtin = builtin;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	@Override
 	public String toString() {
 		return String.format("Exercise [id=%s, name=%s, description=%s, difficulty=%s, type=%s, builtin=%s]", id, name,
-				description, difficulty, type, builtin);
+				description, difficulty, type, userId);
 	}
 }

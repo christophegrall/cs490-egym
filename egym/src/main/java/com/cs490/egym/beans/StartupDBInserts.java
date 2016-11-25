@@ -41,19 +41,17 @@ public class StartupDBInserts implements CommandLineRunner {
 
 	@Override
 	public void run(String... arg0) throws Exception {
-		//TODO: Add default users
-		
 		User user = userRepo.findByUsername("user");
 		List<ExerciseImpl> exList = new ArrayList<ExerciseImpl>();
 		
-		ExerciseImpl bench = new ExerciseImpl("Bench press", "Press bench", DifficultyEnum.INTERMEDIATE, TypeEnum.WEIGHTLIFTING, true);
-		WeightliftingImpl benchWL = new WeightliftingImpl(200.0, WeightTypeEnum.LBS, Integer.valueOf(10), Integer.valueOf(3), bench, user, new Date(System.currentTimeMillis()));
+		ExerciseImpl bench = new ExerciseImpl("Bench press", "The bench press is an upper body strength training exercise that consists of pressing a weight upwards from a supine position.", DifficultyEnum.INTERMEDIATE, TypeEnum.WEIGHTLIFTING);
+		WeightliftingImpl benchWL = new WeightliftingImpl(225.0, WeightTypeEnum.LBS, Integer.valueOf(5), Integer.valueOf(5), bench, user, new Date(System.currentTimeMillis()));
 		
-		ExerciseImpl running = new ExerciseImpl("Running", "Walking really fast", DifficultyEnum.BEGINNER, TypeEnum.CARDIO, true);
-		CardioImpl runningCardio = new CardioImpl(2.0, Integer.valueOf(20), running, user, new Date(System.currentTimeMillis()));
+		ExerciseImpl running = new ExerciseImpl("Running", "Running is a method of terrestrial locomotion allowing humans and other animals to move rapidly on foot.", DifficultyEnum.BEGINNER, TypeEnum.CARDIO);
+		CardioImpl runningCardio = new CardioImpl(2.0, Integer.valueOf(10), running, user, new Date(System.currentTimeMillis()));
 		
-		ExerciseImpl sitUps = new ExerciseImpl("Sit ups", "You sit up", DifficultyEnum.INTERMEDIATE, TypeEnum.CORE, true);
-		CoreImpl sitUpsCore = new CoreImpl(sitUps, user, new Date(System.currentTimeMillis()), Integer.valueOf(10), Integer.valueOf(10), Integer.valueOf(4));
+		ExerciseImpl sitUps = new ExerciseImpl("Sit-ups", "The sit-up (or curl-up) is an abdominal endurance training exercise commonly performed to strengthen and tone the abdominal muscles.", DifficultyEnum.BEGINNER, TypeEnum.CORE);
+		CoreImpl sitUpsCore = new CoreImpl(sitUps, user, new Date(System.currentTimeMillis()), Integer.valueOf(10), Integer.valueOf(10), Integer.valueOf(10));
 		
 		exList.add(bench);
 		exList.add(running);

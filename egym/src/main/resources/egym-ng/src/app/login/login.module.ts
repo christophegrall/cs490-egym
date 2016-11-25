@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 
 import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
-import { AlertModule, ButtonsModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { AlertModule, ButtonsModule, ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { LoginService } from './login.service';
 import { LoginComponent } from './login.component';
 import { LoginRoutingModule } from './login-routing.module';
@@ -21,6 +21,7 @@ let localStorageServiceConfig = {
   imports: [
     AlertModule,
     ButtonsModule,
+    ModalModule,
     FormsModule,
     HttpModule,
     CommonModule,

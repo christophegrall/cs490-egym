@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, Renderer } from '@angular/core';
 import { Router } from '@angular/router';
-import { Response } from '@angular/http';
 
+import { tokenNotExpired } from 'angular2-jwt';
+import { ModalDirective } from 'ng2-bootstrap/ng2-bootstrap';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { LoginService } from './login.service';
 import { AuthResponse, Auth } from './auth';
@@ -12,10 +13,12 @@ import { AuthResponse, Auth } from './auth';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('loginModal') public loginModal: ModalDirective;
+  @ViewChild('passwordInput') public passwordInput;
   public auth: Auth;
-  @ViewChild('passwordInput') passwordInput;
   public togglePasswordType: boolean = true;
   public usernameLength: boolean = false;
+  public status: string = "";
 
   constructor(
     private login: LoginService, 
@@ -29,6 +32,7 @@ export class LoginComponent implements OnInit {
       this.usernameLength = true;
       return;
     }
+    this.usernameLength = false;
     this.auth = {
       username: username,
       password: password
@@ -41,7 +45,9 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['home']);
             break;
           default:
-            console.warn(`Status: ${data}`);
+            this.status = `${data.body}!`;
+            this.loginModal.show();
+            console.warn(data);
         }
       },
       error => {
@@ -49,18 +55,29 @@ export class LoginComponent implements OnInit {
         //422 (incorrect username/password)
         //423 (account is disabled/locked)
         if (error instanceof AuthResponse) {
-          //TODO: Show user the problem
+          this.status = `${error.body}!`;
+        } else {
+          this.status = 'Unknown error';
         }
+        this.loginModal.show();
         console.error(error);
       }
     );
   }
 
   ngOnInit() {
+    if(tokenNotExpired('egym.token')) {
+      this.router.navigate(['home']);
+      return;
+    }
     this.auth = {
       username: '',
       password: ''
     }
+  }
+
+  public hideLoginModal(): void {
+    this.loginModal.hide();
   }
 
   /**
