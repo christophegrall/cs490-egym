@@ -5,96 +5,37 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Fitness</title>
-    <style>
-        /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-        .row.content {height: 1500px}
-
-        /* Set gray background color and 100% height */
-        .sidenav {
-            background-color: #f1f1f1;
-            height: 100%;
-        }
-
-        /* Set black background color, white text and some padding */
-        footer {
-            background-color: #555;
-            color: white;
-            padding: 15px;
-        }
-
-        /* On small screens, set height to 'auto' for sidenav and grid */
-        @media screen and (max-width: 767px) {
-            .sidenav {
-                height: auto;
-                padding: 15px;
-            }
-            .row.content {height: auto;}
-        }
-    </style>
-    </head>
-    <body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Fitness</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-            </ul>
-        </div>
-    </nav>
+</head>
+<body>
+<nav class="navbar navbar-default">
     <div class="container-fluid">
-        <div class="row content">
-            <div class="col-sm-3 sidenav">
-                <h4>Workouts </h4>
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#section1">Weightlifting</a></li>
-                    <li><a href="#">Running</a></li>
-                    <li><a href="#">Core</a></li>
-                    <li><a href="#">Legs</a></li>
-                </ul><br>
-            </div>
-            <div class="col-sm-9">
-                <h4><small>Description of Workout</small></h4>
-                <hr>
-                <h2>Weightlifting</h2>
-                <h5><span class="label label-danger">Strength</span> <span class="label label-primary">Muscle Endurance</span></h5><br>
-                <p>Weightlifting, at it's core, is muscle strengthening and endurance.  There are many different types of routines and exercises one can preform in order to acheive this.  Most individuals set daily schedules in order to properly
-                    rotate muscle groups during the week. Some basic routes are as follows.</p><br><br>
-                <div class="col-sm-3" style="background-color: lightsteelblue">
-                    <h4>Routine One</h4>
-                    <hr>
-                    <div class="container-fluid">
-                    <h2>Monday</h2>
-                    <ul class="list-group">
-                        <li class="list-group-item"><b>Chest</b></li>
-                        <div class="list-group-item-info" style="padding-left: 5px"><a href="#">Butterflys</a> - 3 sets of 6 reps</div>
-                        <div class="list-group-item-info" style="padding-left: 5px"><a href="#">Barbell Bench Press</a> - 3 sets of 6 reps</div>
-                        <div class="list-group-item-info" style="padding-left: 5px"><a href="#">Incline Dumbell Press</a> - 3 sets of 6 reps</div>
-                        <div class="list-group-item-info" style="padding-left: 5px"><a href="https://www.youtube.com/watch?v=GtHNC-5GtR0">Incline Bench Cable Fly</a> - 3 sets of 6 reps</div>
-                        <li class="list-group-item">Biceps</li>
-                        <li class="list-group-item">Forearms</li>
-                    </ul>
-                        <br>
-                    <h2>Tuesday</h2>
-                    <ul class="list-group">
-                        <li class="list-group-item">Chest</li>
-                        <li class="list-group-item">Biceps</li>
-                        <li class="list-group-item">Forearms</li>
-                    </ul>
-
-                </div>
-                </div>
-
-            </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Fitness</a>
         </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+        </ul>
     </div>
-
-    <footer class="container-fluid">
-        <p>Footer Text</p>
-    </footer>
-
-    </body>
-    </html>
-
+</nav>
+<div class="container">
+    <div class="col-lg-10 well well-lg">
+        <div><h3>Exercise: <small>Dumbell curls</small></h3><h3><small>Lateral bicep strengthening exercise</small></h3><h3>Difficulty: <small class="alert alert-success">Easy</small></h3>
+        <h3>Type: <small>Strengthening</small></h3></div>
+    </div>
+    <div class="col-lg-10 well well-lg">
+        <div><h3>Exercise: <small>Squats</small></h3><h3><small>Largest muscle in the body to work out, thigh strengthening exercise</small></h3><h3>Difficulty: <small class="alert alert-success">Easy</small></h3>
+            <h3>Type: <small>Strengthening</small></h3></div>
+    </div>
+    <div class="col-lg-10 well well-lg">
+        <div><h3>Exercise: <small>Sprints</small></h3><h3><small>Fast outbreak in running as fast as you can for a given distance (50m, 100, 200m)</small></h3><h3>Difficulty: <small class="alert alert-warning">Moderate</small></h3>
+            <h3>Type: <small>Endurance</small></h3></div>
+    </div>
+    <div class="col-lg-10 well well-lg">
+        <div><h3>Exercise: <small>Hang cling dead lift</small></h3><h3><small>Requires experience with the deadlift technique to prevent injury.  Hang cling dead lift is a modified deadlift movement
+        that requires the user to lift the bar up and over the head.</small></h3><h3>Difficulty: <small class="alert alert-danger">Difficult</small></h3>
+            <h3>Type: <small>Strengthening</small></h3></div>
+    </div>
+</div>
+</body>
+</html>
