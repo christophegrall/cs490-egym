@@ -5,6 +5,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ExerciseService } from './exercise.service';
 import { Exercise } from './exercise';
+import { Difficulty } from './difficulty.enum';
 
 @Component({
   selector: 'app-homepage',
@@ -20,16 +21,15 @@ export class HomepageComponent implements OnInit {
     private exerciseService: ExerciseService
   ) { }
 
+  logout(): void {
+    if(this.localStorageService.get('token')) {
+      this.localStorageService.remove('token');
+    }
+  }
+
   ngOnInit() {
     if(!tokenNotExpired('egym.token')) {
       this.router.navigate(['login']);
-    } else {
-      this.exerciseService.getAll(<string> this.localStorageService.get('token')).subscribe(
-        data => {
-          this.exercises = data;
-          console.log(data);
-        }
-      )
     }
   }
 

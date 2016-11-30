@@ -1,0 +1,44 @@
+<div class="container">
+  <h2>My Exercises</h2>
+  <!--<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Difficulty
+                <span class="caret"></span></button>
+    <ul class="dropdown-menu dropdown-menu-left">
+      <li (click)="sortDiff(0)">All</li>
+      <li (click)="sortDiff(1)">Beginner</li>
+      <li (click)="sortDiff(2)">Intermediate</li>
+      <li (click)="sortDiff(3)">Advanced</li>
+      <li (click)="sortDiff(4)">Expert</li>
+    </ul>
+  </div>
+
+  <div class="btn-group" dropdown [(isOpen)]="status.isopen">
+    <button id="single-button" type="button" class="btn btn-primary" dropdownToggle [disabled]="disabled">
+      Button dropdown <span class="caret"></span>
+    </button>
+    <ul dropdownMenu role="menu" aria-labelledby="single-button">
+      <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+      <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+      <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+      <li class="divider dropdown-divider"></li>
+      <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a></li>
+    </ul>
+  </div>
+
+  <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Type
+                <span class="caret"></span></button>
+    <ul class="dropdown-menu dropdown-menu-left">
+      <li (click)="sortType(0)">All</li>
+      <li (click)="sortType(1)">Cardio</li>
+      <li (click)="sortType(2)">Core</li>
+      <li (click)="sortType(3)">Weightlifting</li>
+    </ul>
+  </div>-->
+  <div class="col-lg-10 well well-lg" *ngFor="let ex of user_exercises" (click)="gotoDetail(ex)">
+      <h3>Exercise: <small>{{ex.name}}</small></h3>
+      <h3><small>{{ex.description}}</small></h3>
+      <h3>Difficulty: <small>{{ex.difficulty | lowercase}}</small></h3>
+      <h3>Type: <small>{{ex.type | lowercase}}</small></h3>
+  </div>
+</div>

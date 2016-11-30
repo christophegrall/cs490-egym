@@ -8,6 +8,9 @@ import { AlertModule, ButtonsModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { ExerciseService } from './exercise.service';
 import { HomepageComponent } from './homepage.component';
 import { HomepageRoutingModule } from './homepage-routing.module';
+import { AboutComponent } from './about/about.component';
+import { ExerciseListComponent } from './exercise-list/exercise-list.component';
+import { ExerciseDetailComponent } from './exercise-detail/exercise-detail.component';
 
 let localStorageServiceConfig = {
     prefix: 'egym',
@@ -16,7 +19,10 @@ let localStorageServiceConfig = {
 
 @NgModule({
   declarations: [
-    HomepageComponent
+    HomepageComponent,
+    AboutComponent,
+    ExerciseListComponent,
+    ExerciseDetailComponent
   ],
   imports: [
     AlertModule,
